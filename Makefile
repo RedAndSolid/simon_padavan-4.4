@@ -55,3 +55,12 @@ $(PRODUCTS):
 	@echo "CONFIG_CROSS_COMPILER_ROOT=$(TOOLCHAIN_ROOT)" >> $(CONFIG)
 	@echo "CONFIG_CCACHE=y" >> $(CONFIG)
 	@make build
+CROSS=/work/padavan-4.4/toolchain-mipsel/toolchain-4.4.x/bin/mipsel-linux-uclibc-
+KERNEL=/work/padavan-4.4/trunk/linux-4.4.x/
+STRIP=/work/padavan-4.4/toolchain-mipsel/toolchain-4.4.x/bin/mipsel-linux-uclibc-strip
+
+all:
+      #make ARCH=mips CROSS_COMPILE=$(CROSS) -C $(KERNEL) SUBDIRS=$(PWD) modules
+      $(STRIP) $(PWD)/$(RT_DRV_NAME).ko
+clean:
+      make -C $(KERNEL) SUBDIRS=$(PWD) clean
