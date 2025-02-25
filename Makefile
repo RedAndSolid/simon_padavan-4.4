@@ -61,6 +61,6 @@ STRIP=/work/padavan-4.4/toolchain-mipsel/toolchain-4.4.x/bin/mipsel-linux-uclibc
 
 all:
       #make ARCH=mips CROSS_COMPILE=$(CROSS) -C $(KERNEL) SUBDIRS=$(PWD) modules
-      $(STRIP) $(PWD)/$(RT_DRV_NAME).ko
+      $(STRIP)	$(PWD)/$(RT_DRV_NAME).ko
 clean:
       make -C $(KERNEL) SUBDIRS=$(PWD) clean
