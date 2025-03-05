@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - 内网穿透</title>
+<title><#Web_Title#> - Проброс портов</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -137,11 +137,11 @@ function done_validating(action){
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="box well grad_colour_dark_blue">
-							<h2 class="box_head round_top">Frp - 内网穿透</h2>
+							<h2 class="box_head round_top">Frp - Проброс портов</h2>
 							<div class="round_bottom">
 								<div class="row-fluid">
 									<div id="tabMenu" class="submenuBlock"></div>
-									<div class="alert alert-info" style="margin: 10px;">frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp 协议，为 http 和 https 应用协议提供了额外的能力，且尝试性支持了点对点穿透。
+									<div class="alert alert-info" style="margin: 10px;">frp — это высокопроизводительное реверсивное прокси-приложение для проброса портов во внутреннюю сеть, поддерживающее протоколы tcp, udp, и предоставляющее возможности для протоколов http и https.<br>
 									</div>
 
 									<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
@@ -152,7 +152,7 @@ function done_validating(action){
                                             <td id="frps_status" colspan="2"></td>
                                         </tr>
 										<tr>
-											<th width="30%"><a class="help_tooltip" href="javascript: void(0)" onmouseover="openTooltip(this, 26, 9);">启用frpc</a></th>
+											<th width="30%"><a class="help_tooltip" href="javascript: void(0)" onmouseover="openTooltip(this, 26, 9);">Включить frpc</a></th>
 											<td>
 													<div class="main_itoggle">
 													<div id="frpc_enable_on_of">
@@ -166,7 +166,7 @@ function done_validating(action){
 											</td>
 										</tr>
 												<tr>
-											<th width="30%"><a class="help_tooltip" href="javascript: void(0)" onmouseover="openTooltip(this, 26, 9);">启用frps</a></th>
+											<th width="30%"><a class="help_tooltip" href="javascript: void(0)" onmouseover="openTooltip(this, 26, 9);">Включить frps</a></th>
 											<td>
 													<div class="main_itoggle">
 													<div id="frps_enable_on_of">
@@ -181,9 +181,9 @@ function done_validating(action){
 										</tr>
 										<tr id="row_post_wan_script">
 											<td colspan="2">
-												<i class="icon-hand-right"></i> <a href="javascript:spoiler_toggle('script2')"><span>frp脚本-请自行配置脚本里的相关参数</span></a>
+												<i class="icon-hand-right"></i> <a href="javascript:spoiler_toggle('script2')"><span>frp скрипт - пожалуйста, настройте параметры в скрипте вручную</span></a>
 												<div id="script2">
-													<textarea rows="18" wrap="off" spellcheck="false" maxlength="314571" class="span12" name="scripts.frp_script.sh" style="font-family:'Courier New'; font-size:12px;"><% nvram_dump("scripts.frp_script.sh",""); %></textarea>
+													<textarea rows="18" wrap="off" spellcheck="false" maxlength="314571" class="span12" name="scripts.frp_script.sh" style="font-family:'Courier New'; font-size:12px;"><% nvram_dump("scripts.frp_script.sh"); %></textarea>
 												</div>
 											</td>
 										</tr>
