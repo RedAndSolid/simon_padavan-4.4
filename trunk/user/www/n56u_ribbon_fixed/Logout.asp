@@ -34,7 +34,7 @@ function initial(){
             <div class="well" style="max-width: 600px;">
                 <h2><#Сообщение_о_выходе#></h2>
 
-                <div><#Не_авторизованная_страница_войти_снова#></div>
+                <div><#Не_авторизован_войти_снова#></div>
             </div>
         </center>
     </div>
