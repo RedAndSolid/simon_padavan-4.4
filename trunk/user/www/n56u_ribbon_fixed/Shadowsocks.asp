@@ -58,7 +58,7 @@
 			$j("#btn_add_link").click(function () {
 				initSSParams();
 				editing_ss_id = 0;
-				document.getElementById("ss_setting_title").innerHTML = "添加节点";
+				document.getElementById("ss_setting_title").innerHTML = "Добавить узел";
 				$j("#vpnc_settings").fadeIn(200);
 			});
 			$j("#btn_del_link").click(function () {
@@ -102,17 +102,17 @@
 function ctime() {
 var t=0;
 c=null;
-document.getElementById('btn_ctime').value='正在运行脚本:0s';
+document.getElementById('btn_ctime').value='Скрипт выполняется:0s';
 document.getElementById('btn_ctime').style.display="inline";
 		c=setInterval(function(){
 		t=t+1
-        //document.getElementById("ctime").value=t + "秒";
-		document.getElementById('btn_ctime').value='正在运行脚本:' + t +"s";
+        //document.getElementById("ctime").value=t + "Секунда";
+		document.getElementById('btn_ctime').value='Скрипт в процессе выполнения:' + t +"s";
     },1000);
 }
 function dtime() {
 clearInterval(c);
-document.getElementById('btn_ctime').value='脚本运行完成!';
+document.getElementById('btn_ctime').value='Скрипт выполнен!';
 setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 }
 		function initial() {
@@ -124,7 +124,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			fill_dnsproxy_status(dnsproxy_status());
 			var wan0_dns = '<% nvram_get_x("","wan0_dns"); %>';
 			if (wan0_dns.length > 0){ // use local DNS
-					$j("select[name='china_dns']").prepend($j('<option value="'+wan0_dns+'" selected>本地DNS ' + wan0_dns + '</option>'));
+					$j("select[name='china_dns']").prepend($j('<option value="'+wan0_dns+'" selected>Локальный DNS ' + wan0_dns + '</option>'));
 			}
 
 			$("chnroute_count").innerHTML = '<#menu5_17_3#>' + chnroute_count();
@@ -379,7 +379,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			html += '<br />';
 			html += '<iframe src="https://myip.ipip.net" height="30" scrolling="no" frameborder="0" marginheight="0" marginwidth="0"></iframe>';
 			html += '<br />';
-			html += '<span>国外：<iframe src="https://api.myip.la" height="30" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" style="display:inline;width:50%;position:relative;top:4px;"></iframe></span>';
+			html += '<span>За границей：<iframe src="https://api.myip.la" height="30" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" style="display:inline;width:50%;position:relative;top:4px;"></iframe></span>';
 			//html += '<br />';
 			html += '<span><img src="https://www.google.com/favicon.ico?' + new Date().getTime() + '" /></span>';
 			$("ss_status").innerHTML = html;
@@ -439,12 +439,12 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			document.form.current_page.value = "Shadowsocks.asp#add";
 			return true;
 		}
-		//订阅节点
+		//Узлы подписки
 		function dlink() {
 		ctime();
 			var ns = {};
 			ns[1] = "dlink";
-			document.getElementById("btn_update_link").value="正在更新订阅节点";
+			document.getElementById("btn_update_link").value="Обновление подписки на узлы";
 			$j.ajax({
 				url: "/applydb.cgi?usedlink=1&p=ss",
 				type: 'POST',
@@ -452,19 +452,19 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				dataType: 'text',
 				data: $j.param(ns),
 				error: function (xhr) {
-					alert("脚本执行失败！！！")
+					alert("Выполнение скрипта не удалось!!!")
 				},
 				success: function (response) {
-					setTimeout("dtime();$j('#table99').bootstrapTable('refresh');document.getElementById('btn_update_link').value='更新所有订阅服务器节点';",1000);
+					setTimeout("dtime();$j('#table99').bootstrapTable('refresh');document.getElementById('btn_update_link').value='Обновить все серверные узлы подписки';",1000);
 				}
 			});
 		}
-		//清空节点
+		//Очистить узлы
 		function ddlink() {
 		ctime();
 			var ns = {};
 			ns[1] = "ddlink";
-			document.getElementById("btn_rest_link").value="正在清空节点";
+			document.getElementById("btn_rest_link").value="Очистить узлы";
 			$j.ajax({
 				url: "/applydb.cgi?useddlink=1&p=ss",
 				type: 'POST',
@@ -472,11 +472,11 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				dataType: 'text',
 				data: $j.param(ns),
 				error: function (xhr) {
-					alert("脚本执行失败！！！")
+					alert("Выполнение скрипта не удалось!!!")
 				},
 				success: function (response) {
 					node_global_max=0;
-					setTimeout("dtime();$j('#table99').bootstrapTable('refresh');document.getElementById('btn_rest_link').value='清空所有节点';",1000);
+					setTimeout("dtime();$j('#table99').bootstrapTable('refresh');document.getElementById('btn_rest_link').value='Очистить все узлы';",1000);
 				}
 			});
 		}
@@ -491,7 +491,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 						sortOrder: "desc",
 						sidePagination: 'client',
 						pageSize: 15,
-						pageList: [15, 25, 35, 50], // 分页显示记录数
+						pageList: [15, 25, 35, 50], // Число записей на странице
 						uniqueId: "ids",
 						ajax:function(request) {
 						$j.ajax({
@@ -501,23 +501,23 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 							request.success({
 							  row : data
 							});
-							//显示节点下拉列表 by 花妆男
-					// 渲染父节点  obj 需要渲染的数据 keyStr key需要去除的字符串
+							//Показать выпадающий список узлов от 花妆男
+					// Отобразить родительский узел  obj Данные, которые нужно отобразить keyStr key Строка, которую нужно удалить
 					var keyStr = "ssconf_basic_json_";
-					var nodeList = document.getElementById("nodeList"); // 获取TCP节点
-					var unodeList = document.getElementById("u_nodeList"); // 获取UDP节点
-					var s5nodeList = document.getElementById("s5_nodeList"); // 获取SOCK5节点
-					nodeList.options.length=1; // 清除TCP旧节点，准备获取新列表信息
-					unodeList.options.length=1;// 清除UDP旧节点，准备获取新列表信息
-					s5nodeList.options.length=1;// 清除SOCK5旧节点，准备获取新列表信息
-					for (var key in db_ss) { // 遍历对象
-						var optionObj = JSON.parse(db_ss[key]); // 字符串转为对象
-						//if(optionObj.ping != "failed"){   //过滤ping不通的节点
-					var text = '[ ' + (optionObj.type ? optionObj.type : "类型获取失败") + ' ] ' + (optionObj.alias ? optionObj.alias : "名字获取失败"); // 判断下怕获取失败 ，括号是运算的问题
-						// 添加 
-						nodeList.options.add(new Option(text, key.replace(keyStr, ''))); // 通过 replacce把不要的字符去掉
-						unodeList.options.add(new Option(text, key.replace(keyStr, ''))); // 通过 replacce把不要的字符去掉
-						s5nodeList.options.add(new Option(text, key.replace(keyStr, ''))); // 通过 replacce把不要的字符去掉
+					var nodeList = document.getElementById("nodeList"); // Получить TCP-узлы
+					var unodeList = document.getElementById("u_nodeList"); // Получить UDP-узлы
+					var s5nodeList = document.getElementById("s5_nodeList"); // Получить SOCKS5-узлы
+					nodeList.options.length=1; // Очистить старые узлы TCP，подготовка к получению нового списка информации
+					unodeList.options.length=1;// Очистить старые узлы UDP，подготовка к получению нового списка информации
+					s5nodeList.options.length=1;// Очистить старые узлы SOCK5，подготовка к получению нового списка информации
+					for (var key in db_ss) { // Перебор объекта
+						var optionObj = JSON.parse(db_ss[key]); // Преобразование строки в объект
+						//if(optionObj.ping != "failed"){   //Фильтровать узлы, не отвечающие на ping
+					var text = '[ ' + (optionObj.type ? optionObj.type : "Не удалось получить тип") + ' ] ' + (optionObj.alias ? optionObj.alias : "Не удалось получить имя"); // Проверить, не произошла ли ошибка при получении Скобки — это проблема вычислений
+						// Добавить 
+						nodeList.options.add(new Option(text, key.replace(keyStr, ''))); // Используя replace, удалить ненужные символы
+						unodeList.options.add(new Option(text, key.replace(keyStr, ''))); // Используя replace, удалить ненужные символы
+						s5nodeList.options.add(new Option(text, key.replace(keyStr, ''))); // Используя replace, удалить ненужные символы
 						$j('#nodeList>option').sort(function (a, b) {
 							var aText = $j(a).val() * 1;
 							var bText = $j(b).val() * 1;
@@ -526,7 +526,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 							return 0;
 						}).appendTo('#nodeList');
 						$j('#nodeList>option').eq(0).attr("selected", "selected");
-						//udp列表
+						//Список UDP
 						$j('#u_nodeList>option').sort(function (a, b) {
 							var aText = $j(a).val() * 1;
 							var bText = $j(b).val() * 1;
@@ -535,7 +535,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 							return 0;
 						}).appendTo('#u_nodeList');
 						$j('#u_nodeList>option').eq(0).attr("selected", "selected");
-						//s5列表
+						//Список SOCKS5
 						$j('#s5_nodeList>option').sort(function (a, b) {
 							var aText = $j(a).val() * 1;
 							var bText = $j(b).val() * 1;
@@ -544,17 +544,17 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 							return 0;
 						}).appendTo('#s5_nodeList');
 						$j('#s5_nodeList>option').eq(0).attr("selected", "selected");
-						//$j('#nodeList').selectpicker('val', '<% nvram_get_x("","global_server"); %>'); //主服务器列表默认
-						//$j('#u_nodeList').selectpicker('val', '<% nvram_get_x("","udp_relay_server"); %>'); //UDP服务器列表默认
+						//$j('#nodeList').selectpicker('val', '<% nvram_get_x("","global_server"); %>'); //Список основных серверов по умолчанию
+						//$j('#u_nodeList').selectpicker('val', '<% nvram_get_x("","udp_relay_server"); %>'); //Список UDP-серверов по умолчанию
 						document.form.global_server.value = '<% nvram_get_x("","global_server"); %>';
 						document.form.udp_relay_server.value = '<% nvram_get_x("","udp_relay_server"); %>';
 						document.form.socks5_enable.value = '<% nvram_get_x("","socks5_enable"); %>';
 						//}
 					}
-					//订阅节点表格
+					//Таблица узлов подписки
 					var myss = new Array();
 					var i = 0;
-					for (var key in db_ss) { // 遍历对象
+					for (var key in db_ss) { // Перебор объекта
 						var dbss = JSON.parse(db_ss[key])
 						dbss.ids = key.replace("ssconf_basic_json_", '');
 						myss[i] = dbss;
@@ -575,19 +575,19 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 					  },
 						columns: [{
 							field: 'delete',
-							title: '删除',
+							title: 'Удалить',
 							checkbox: true,
 							width: '30px'
 						}, {
 							field: 'ids',
-							title: '序号',
+							title: 'Номер',
 							width: '30px',
 							align: 'center',
 							valign: 'middle',
 							sortable: true
 						}, {
 							field: 'type',
-							title: '类型',
+							title: 'Тип',
 							align: 'center',
 							valign: 'middle',
 							width: '10px'
@@ -595,7 +595,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 							field: 'alias',
 							cellStyle: formatTableUnit,
 							formatter: paramsMatter,
-							title: '别名',
+							title: 'Псевдоним',
 							align: 'center',
 							valign: 'middle',
 							width: '230px'
@@ -603,7 +603,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 							field: 'server',
 							cellStyle: formatTableUnit,
 							formatter: paramsMatter,
-							title: '服务器地址',
+							title: 'Адрес сервера',
 							align: 'center',
 							valign: 'middle',
 							width: '150px'
@@ -618,13 +618,13 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 							sortable: true
 						}, {
 							field: 'lost',
-							title: '丢包',
+							title: 'Потеря пакетов',
 							align: 'center',
 							valign: 'middle',
 							width: '50px'
 						}, {
 							field: 'operate',
-							title: '操作',
+							title: 'Операция',
 							width: '200px',
 							align: 'center',
 							valign: 'middle',
@@ -676,24 +676,24 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 		}
 		function actionFormatter(value, row, index) {
 			return [
-				'<a class="edit_ss" href="javascript:void(0)" title="编辑">编辑</a>',
-				'<a class="copy_ss" href="javascript:void(0)" title="复制">复制</a>',
-				'<a class="del_ss" href="javascript:void(0)" title="删除">删除</a>'
+				'<a class="edit_ss" href="javascript:void(0)" title="Редактировать">Редактировать</a>',
+				'<a class="copy_ss" href="javascript:void(0)" title="Копировать">Копировать</a>',
+				'<a class="del_ss" href="javascript:void(0)" title="Удалить">Удалить</a>'
 			].join(' | ');
 		}
 		window.operateEvents = {
 			'click .edit_ss': function (e, value, row, index) {
 				editing_ss_id = row.ids;
-				document.getElementById("ss_setting_title").innerHTML = "编辑节点";
+				document.getElementById("ss_setting_title").innerHTML = "Редактировать узел";
 				showSSEditor(row);
 			},
 			'click .copy_ss': function (e, value, row, index) {
 				editing_ss_id = 0;
-				document.getElementById("ss_setting_title").innerHTML = "复制节点";
+				document.getElementById("ss_setting_title").innerHTML = "Копировать узел";
 				showSSEditor(row);
 			},
 			'click .del_ss': function (e, value, row, index) {
-				if (confirm('确认删除' + row.alias + '吗？')) {
+				if (confirm('Подтвердить удаление' + row.alias + '？')) {
 					del(row.ids);
 				}
 			}
@@ -754,7 +754,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			document.getElementById("s5_username").value = '';
 			switch_ss_type();
 		}
-		//编辑节点
+		//РедактироватьУзел
 		function showSSEditor(ss) {
 			function getProperty(obj, prop, defVal) {
 				return obj && obj.hasOwnProperty(prop) ? obj[prop] : defVal;
@@ -825,7 +825,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			switch_ss_type();
 			$j("#vpnc_settings").fadeIn(200);
 		}
-		//单项删除
+		//单项Удалить
 		function del(id) {
 		ctime();
 			var p = "ssconf_basic";
@@ -838,7 +838,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				dataType: 'text',
 				data: $j.param(ns),
 				error: function (xhr) {
-					alert("删除失败,请重试！")
+					alert("Удалитьне удалось,попробуйте снова！")
 				},
 				success: function (response) {
 				dtime();
@@ -846,7 +846,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				}
 			});
 		}
-		//批量删除
+		//Пакет Удалить
 		function del_dlink() {
 		ctime();
 			var row = $j("#table99").bootstrapTable('getSelections');
@@ -856,7 +856,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				ns[p + "_json_" + row[key].ids] = "deleting";
 			}
 			//console.log(ns)
-			document.getElementById("btn_del_link").value="正在删除节点";
+			document.getElementById("btn_del_link").value="Процесс УдалитьУзел";
 			$j.ajax({
 				url: "/applydb.cgi?userm1=del&p=ss",
 				type: 'POST',
@@ -864,14 +864,14 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				dataType: 'text',
 				data: $j.param(ns),
 				error: function (xhr) {
-					alert("删除失败,请重试！")
+					alert("Удалитьне удалось,попробуйте снова！")
 				},
 				success: function (response) {
-					setTimeout("dtime();$j('#table99').bootstrapTable('refresh');document.getElementById('btn_del_link').value='批量删除节点';",1000);
+					setTimeout("dtime();$j('#table99').bootstrapTable('refresh');document.getElementById('btn_del_link').value='Пакет УдалитьУзел';",1000);
 				}
 			});
 		}
-		//ping节点
+		//pingУзел
 		function ping_dlink() {
 		ctime();
 			var row = $j("#table99").bootstrapTable('getSelections');
@@ -881,7 +881,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				ns[row[key].ids] = "ping";
 			}
 			//showLoading();
-			document.getElementById("btn_ping_link").value="正在ping节点";
+			document.getElementById("btn_ping_link").value="Процесс pingУзел";
 			$j.ajax({
 				url: "/applydb.cgi?useping=1&p=ss",
 				type: 'POST',
@@ -889,20 +889,20 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				dataType: 'text',
 				data: $j.param(ns),
 				error: function (xhr) {
-					alert("脚本执行失败！！！")
+					alert("Выполнение скрипта не удалось!!!")
 				},
 				success: function (response) {
-					setTimeout("dtime();$j('#table99').bootstrapTable('refresh');document.getElementById('btn_ping_link').value='ping节点';",2000);
+					setTimeout("dtime();$j('#table99').bootstrapTable('refresh');document.getElementById('btn_ping_link').value='pingУзел';",2000);
 					
 				}
 			});
 		}
-		//ping全部节点
+		//ping полностью Узел
 		function aping_dlink() {
 		ctime();
 			var ns = {};
 			ns[1] = "allping";
-			document.getElementById("btn_aping_link").value="正在ping全部节点";
+			document.getElementById("btn_aping_link").value="Процесс ping полностью Узел";
 			$j.ajax({
 				url: "/applydb.cgi?useping=1&p=ss",
 				type: 'POST',
@@ -910,10 +910,10 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				dataType: 'text',
 				data: $j.param(ns),
 				error: function (xhr) {
-					alert("脚本执行失败！！！")
+					alert("Выполнение скрипта не удалось!!!")
 				},
 				success: function (response) {
-					setTimeout("dtime();$j('#table99').bootstrapTable('refresh');document.getElementById('btn_aping_link').value='ping全部节点';",2000);
+					setTimeout("dtime();$j('#table99').bootstrapTable('refresh');document.getElementById('btn_aping_link').value='ping полностью Узел';",2000);
 				}
 			});
 		}
@@ -923,7 +923,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			span.innerHTML = value;
 			return span.outerHTML;
 		}
-		//td宽度以及内容超过宽度隐藏
+		//Ширина ячейки td и скрытие содержимого, превышающего ширину
 		function formatTableUnit(value, row, index) {
 			return {
 				css: {
@@ -934,7 +934,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				}
 			}
 		}
-		//-----------导入链接开始
+		//-----------Начало импорта ссылки
 		function padright(str, cnt, pad) {
 			return str + Array(cnt + 1).join(pad);
 		}
@@ -982,9 +982,9 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			var s = document.getElementById(urlname + '-status');
 			if (!s)
 				return false;
-			var ssrurl = prompt("在这里黏贴配置链接 ssr:// | ss:// | vmess:// | vless:// | trojan://", "");
+			var ssrurl = prompt("Вставьте ссылку для конфигурации сюда ssr:// | ss:// | vmess:// | vless:// | trojan://", "");
 			if (ssrurl == null || ssrurl == "") {
-				s.innerHTML = "<font color='red'>用户取消</font>";
+				s.innerHTML = "<font color='red'>Пользователь отменил</font>";
 				return false;
 			}
 			initSSParams();
@@ -993,7 +993,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			var ssu = ssrurl.split('://');
 			//console.log(ssu.length);
 			if ((ssu[0] != "ssr" && ssu[0] != "ss" && ssu[0] != "vmess" && ssu[0] != "vless" && ssu[0] != "trojan") || ssu[1] == "") {
-				s.innerHTML = "<font color='red'>无效格式</font>";
+				s.innerHTML = "<font color='red'>Неверный формат</font>";
 				return false;
 			}
 			var event = document.createEvent("HTMLEvents");
@@ -1031,7 +1031,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				var rem = pdict['remarks'];
 				if (typeof (rem) != 'undefined' && rem != '' && rem.length > 0)
 					document.getElementById('ssp_name').value = b64decutf8safe(rem);
-				s.innerHTML = "<font color='green'>导入ShadowsocksR配置信息成功</font>";
+				s.innerHTML = "<font color='green'>Импорт ShadowsocksR конфигурации выполнен</font>";
 				return false;
 			} else if (ssu[0] == "ss") {
 				var url0, param = "";
@@ -1075,7 +1075,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				if (param != undefined) {
 				document.getElementById('ssp_name').value = decodeURI(param);
 				}				
-				s.innerHTML = "<font color='green'>导入Shadowsocks配置信息成功</font>";					}
+				s.innerHTML = "<font color='green'>Импорт Shadowsocks конфигурации выполнен</font>";					}
 			 else {
 				var sstr = b64decsafe(url0);
 				document.getElementById('ssp_type').value = "ss";
@@ -1088,7 +1088,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				document.getElementById('ssp_prot').value = part2[1];
 				document.getElementById('ss_password').value = part1[1];
 				document.getElementById('ss_method').value = part1[0];
-				s.innerHTML = "<font color='green'>导入Shadowsocks配置信息成功</font>";
+				s.innerHTML = "<font color='green'>Импорт Shadowsocks конфигурации выполнен</font>";
 				}
 				if (param != undefined) {
 					document.getElementById('ssp_name').value = decodeURI(param);
@@ -1128,7 +1128,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				if (param != undefined) {
 					document.getElementById('ssp_name').value = decodeURI(param);
 				}
-				s.innerHTML = "<font color='green'>导入Trojan配置信息成功</font>";
+				s.innerHTML = "<font color='green'>Импорт Trojan конфигурации выполнен</font>";
 				return false;
 			} else if (ssu[0] == "vmess") {
 				var sstr = b64DecodeUnicode(ssu[1]);
@@ -1180,7 +1180,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 					document.getElementById('ssp_insecure').checked = true;
 					document.getElementById('ssp_tls_host').value = ssm.host;
 				}
-				s.innerHTML = "<font color='green'>导入V2ray配置信息成功</font>";
+				s.innerHTML = "<font color='green'>Импорт V2ray конфигурации выполнен</font>";
 				return false;
 			} else if (ssu[0] == "vless") {
 				var url0, param = "";
@@ -1264,11 +1264,11 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 					document.getElementById('ssp_insecure').checked = false;
 					document.getElementById('ssp_tls_host').value = queryParam.sni || serverPart[0];
 				}
-				s.innerHTML = "<font color='green'>导入Xray配置信息成功</font>";
+				s.innerHTML = "<font color='green'>Импорт Xray конфигурации выполнен</font>";
 				return false;
 			}
 		}
-		//-----------导入链接结束
+		//-----------Импорт 链接结束
 		function check_Timefield_checkbox() {
 			if (document.form.ss_date_x_Sun.checked == true ||
 				document.form.ss_date_x_Mon.checked == true ||
@@ -1315,7 +1315,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			} else
 				document.form.ss_schedule_enable.value = "0";
 		}
-		//点击保存节点按钮
+		//点击保存Узел按钮
 		function showNodeData(idName, obj) {
 			var nodeData = document.getElementById(idName);
 			//console.log(nodeData);
@@ -1440,7 +1440,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			push_data(ns);
 			console.log(DataObj)
 		}
-		//post数据到后台处理
+		//Отправить данные методом POST для обработки на сервере
 		function push_data(obj) {
 			ctime();
 			$j.ajax({
@@ -1558,22 +1558,22 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 										<div>
 											<ul class="nav nav-tabs" style="margin-bottom: 10px;">
 												<li class="active">
-													<a id="tab_ss_cfg" href="#cfg" >客户端</a>
+													<a id="tab_ss_cfg" href="#cfg" >Клиент</a>
 												</li>
 												<li>
-													<a id="tab_ss_add" href="#add">节点管理</a>
+													<a id="tab_ss_add" href="#add">Управление узлами</a>
 												</li>
 												<li>
-													<a id="tab_ss_ssl" href="#ssl">高级设置</a>
+													<a id="tab_ss_ssl" href="#ssl">Расширенные настройки</a>
 												</li>
 												<li>
-													<a id="tab_ss_cli" href="#cli">规则管理</a>
+													<a id="tab_ss_cli" href="#cli">Управление правилами</a>
 												</li>
 												<li>
-													<a id="tab_ss_log" href="#log">运行日志</a>
+													<a id="tab_ss_log" href="#log">Журнал работы</a>
 												</li>
 												<li>
-													<a id="tab_ss_help" href="#help">帮助文档</a>
+													<a id="tab_ss_help" href="#help">Документация</a>
 												</li>
 											</ul>
 										</div>
@@ -1581,20 +1581,20 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 											<div id="tabMenu" class="submenuBlock"></div>
 											<div id="wnd_ss_cfg">
 												<div class="alert alert-info" style="margin: 10px;">
-										一个兼容Shadowsocks、ShadowsocksR 、Vmess、Vless、Trojan、Sock5协议的游戏加速工具。
-										<div><span style="color:#E53333;">注意:</span></div>
+										Инструмент для ускорения игр, совместимый с протоколами Shadowsocks, ShadowsocksR, Vmess, Vless, Trojan, Sock5.
+										<div><span style="color:#E53333;">Внимание:</span></div>
 													<div><span
-															style="color:#E53333;">若被编辑的节点正在运行使用，请完成后点击“应用设置”更新节点信息并重连</span>
+															style="color:#E53333;">Если редактируемый узел используется, после завершения нажмите «Применить настройки», чтобы обновить информацию об узле и повторно подключиться</span>
 													</div>
 													<div><span
-															style="color:#E53333;">运行状态不会实时更新，启动节点后需等待一段时间手动 <input type="button" id="btn_reconnect" class="btn btn-info" value="刷新页面" onclick="window.location.reload();" tabindex="1"> 获取运行状态</span>
+															style="color:#E53333;">Статус выполнения не будет обновляться в реальном времени, после запуска узла необходимо подождать некоторое время и вручную <input type="button" id="btn_reconnect" class="btn btn-info" value="Обновить страницу" onclick="window.location.reload();" tabindex="1"> получить статус выполнения</span>
 													</div>
 												</div>
 												<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
-														<th>客户端<#running_status#>
+														<th>Клиент<#running_status#>
 															<br />
-															国内和国外的GeoIP和谷歌访问
+															GeoIP для внутренних и внешних сетей и доступ к Google
 														</th>
 														<td id="ss_status"></td>
 													</tr>
@@ -1625,7 +1625,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr>
-														<th>总开关</th>
+														<th>Главный переключатель</th>
 														<td>
 															<div class="main_itoggle">
 																<div id="ss_enable_on_of">
@@ -1646,95 +1646,95 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr>
-														<th>主服务器:
+														<th>Основной сервер:
 														</th>
 														<td>
 															<select name="global_server" id="nodeList"
 																style="width: 200px;" onchange="showsdlinkList()">
-																<option value="nil">停用</option>
+																<option value="nil">Отключить</option>
 															</select>
 														</td>
 													</tr>
 													<tr>
-														<th>游戏UDP中继服务器:
+														<th>Сервер ретрансляции UDP для игр:
 														</th>
 														<td>
 															<select name="udp_relay_server" id="u_nodeList"
 																style="width: 200px;" onchange="showsudlinkList()">
-																<option value="nil">停用</option>
-																<option value="same">与主服务相同</option>
+																<option value="nil">Отключить</option>
+																<option value="same">Такой же, как основной сервер</option>
 															</select>
 														</td>
 													</tr>
 													<tr>
-														<th width="50%">多线程并发转发</th>
+														<th width="50%">Многопоточная передача</th>
 														<td>
 															<select name="ss_threads" class="input"
 																style="width: 200px;">
-																<option value="0">自动（CPU线程数）</option>
-																<option value="1">单线程</option>
-																<option value="2">2 线程</option>
-																<option value="4">4 线程</option>
-																<option value="8">8 线程</option>
-																<option value="16">16 线程</option>
-																<option value="24">24 线程</option>
+																<option value="0">Автоматически (количество потоков ЦП)</option>
+																<option value="1">Однопоточный</option>
+																<option value="2">2 потока</option>
+																<option value="4">4 потока</option>
+																<option value="8">8 потоков</option>
+																<option value="16">16 потоков</option>
+																<option value="24">24 потока</option>
 															</select>
 														</td>
 													</tr>
 													<tr>
-														<th width="50%">运行模式</th>
+														<th width="50%">Режим работы</th>
 														<td>
 															<select name="ss_run_mode" id="ss_run_mode" class="input"
 																style="width: 200px;">
 																<option value="gfw"
 																	<% nvram_match_x("","ss_run_mode", "gfw","selected"); %>>
-																	gfw列表模式</option>
+																	Режим списка gfw</option>
 																<option value="router"
 																	<% nvram_match_x("","ss_run_mode", "router","selected"); %>>
-																	绕过大陆IP模式</option>
+																	Режим обхода китайских IP</option>
 																<option value="all"
 																	<% nvram_match_x("","ss_run_mode", "all","selected"); %>>
-																	全局模式</option>
+																	Глобальный режим</option>
 																<option value="oversea"
 																	<% nvram_match_x("","ss_run_mode", "oversea","selected"); %>>
-																	海外用户回国模式</option>
+																	Режим возврата для зарубежных пользователей</option>
 															</select>
 														</td>
 													</tr>
 													<tr>
-														<th width="50%">需要代理的端口</th>
+														<th width="50%">Порты, требующие прокси</th>
 														<td>
 															<select name="s_dports" class="input" style="width: 200px;">
 																<option value="0"
 																	<% nvram_match_x("","s_dports", "0","selected"); %>>
-																	所有端口（默认）</option>
+																	Все порты (по умолчанию)</option>
 																<option value="1"
 																	<% nvram_match_x("","s_dports", "1","selected"); %>>
-																	仅常用端口(不走P2P流量到代理)</option>
+																	Только часто используемые порты (не проксировать P2P трафик)</option>
 															</select>
 														</td>
 													</tr>
 													<tr>
-														<th width="50%">内网控制</th>
+														<th width="50%">Контроль внутренней сети</th>
 														<td>
 															<select name="lan_con" class="input" style="width: 200px;">
-																<option value="0">全部走代理</option>
-																<option value="1">指定IP走代理</option>
+																<option value="0">Все через прокси</option>
+																<option value="1">Указанные IP через прокси</option>
 															</select>
 														</td>
 													</tr>
 													<tr id="row_pdnsd_enable">
-														<th width="50%">DNS代理选择(推荐dnsproxy)</th>
+														<th width="50%">Выбор DNS прокси (рекомендуется dnsproxy)</th>
 														<td>
 															<select name="pdnsd_enable" id="pdnsd_enable" class="input"
 																style="width: 200px;" onchange="switch_dns()">
-																<option value="0">使用dnsproxy查询</option>
-																<option value="1">使用dns2tcp查询</option>
+																<option value="0">Использовать dnsproxy для запросов</option>
+																<option value="1">Использовать dns2tcp для запросов</option>
 															</select>
 														</td>
 													</tr>
 													<tr>
-														<th>加载chinadns-ng(仅绕过模式生效)</th>
+														<th>Загрузить chinadns-ng (действует только в режиме обхода)</th>
 														<td>
 															<div class="main_itoggle">
 																<div id="ss_chdns_on_of">
@@ -1755,16 +1755,16 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr id="row_china_dns" style="display:none;">
-														<th width="50%">国内DNS(仅chinadns-ng生效)</th>
+														<th width="50%">Внутренний DNS (действует только для chinadns-ng)</th>
 														<td>
 															<select name="china_dns" class="input"
 																style="width: 200px;">
-																<option value="223.5.5.5#53">阿里DNS (223.5.5.5)</option>
+																<option value="223.5.5.5#53">AliDNS (223.5.5.5)</option>
 																<option value="114.114.114.114#53">114 DNS
 																	(114.114.114.114)</option>
 																<option value="117.50.11.11#53">OneDNS (117.50.11.11)
 																</option>
-																<option value="180.76.76.76#53">百度DNS (180.76.76.76)
+																<option value="180.76.76.76#53">Baidu DNS (180.76.76.76)
 																</option>
 																<option value="119.29.29.29#53">DNSPOD DNS
 																	(119.29.29.29)</option>
@@ -1773,7 +1773,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr id="row_tunnel_forward" style="display:none;">
-														<th width="50%">国外DNS</th>
+														<th width="50%">Внешний DNS</th>
 														<td>
 															<select name="tunnel_forward" class="input"
 																style="width: 200px;">
@@ -1809,7 +1809,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<!--
-			<tr id="row_ssp_dns_ip" style="display:none;"> <th width="50%">SmartDNS加载方式:</th>
+			<tr id="row_ssp_dns_ip" style="display:none;"> <th width="50%">Метод загрузки SmartDNS:</th>
 				<td>
 				自动配置<input type="radio" value="2" name="ssp_dns_ip" id="ssp_dns_ip_2" <% nvram_match_x("", "ssp_dns_ip", "2", "checked"); %>>
 				手动配置<input type="radio" value="1" name="ssp_dns_ip" id="ssp_dns_ip_1" <% nvram_match_x("", "ssp_dns_ip", "1", "checked"); %>>
@@ -1822,22 +1822,22 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														<td style="border: 0 none; padding: 0px;">
 															<center><input name="button" type="button"
 																	class="btn btn-primary" style="width: 200px"
-																	onclick="applyRule();" value="应用设置" /></center>
+																	onclick="applyRule();" value="Применить настройки" /></center>
 														</td>
 													</tr>
 												</table>
 											</div>
-											<!--节点列表-->
+											<!--Список узлов-->
 											<div id="wnd_ss_add">
 											<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
 														<th colspan="2" style="background-color: #E3E3E3;">
-															订阅节点:添加完地址请先点击一下保存设置按钮,再点击更新订阅按钮。</th>
+															Подписка на узлы: после добавления адреса сначала нажмите кнопку «Сохранить настройки», а затем нажмите кнопку «Обновить подписку».</th>
 													</tr>
 													<tr>
 														<td colspan="3">
 															<i class="icon-hand-right"></i> <a
-																href="javascript:spoiler_toggle('script19')"><span>订阅地址(一行一个地址):</span></a>
+																href="javascript:spoiler_toggle('script19')"><span>Адрес подписки (один адрес на строку):</span></a>
 															<div id="script19">
 																<textarea rows="8" wrap="off" spellcheck="false"
 																	maxlength="314571" class="span12"
@@ -1848,16 +1848,16 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													</tr>
 												</table>
 												<table width="100%" cellpadding="4" cellspacing="0" class="table">
-	                                                                                       <tr><th>关键字过滤（请以/为分隔符）</th>
+	                                                                                       <tr><th>Фильтр по ключевым словам (разделяйте /)</th>
 				<td>
 				<input type="input" name="ss_keyword" id="ss_keyword" value="<% nvram_get_x("", "ss_keyword"); %>" >
-				<br> 命中关键字的节点将被丢弃。多个关键字用 / 分隔
+				<br> Узлы, совпадающие с ключевыми словами, будут отброшены. Разделяйте несколько ключевых слов с помощью /
 				</td>
 			</tr>
 
 													<tr id="ss_schedule_enable_tr" width="50%">
 
-														<th width="50%">启用定时更新订阅</th>
+														<th width="50%">Включить автоматическое обновление подписки</th>
 														<td>
 															<div class="main_itoggle">
 																<div id="ss_schedule_enable_on_of">
@@ -1880,53 +1880,53 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr id="ss_schedule_date_tr">
-														<th>自动更新星期</th>
+														<th>Автоматическое обновление по дням недели</th>
 														<td>
 															<input type="checkbox" name="ss_date_x_Sun" class="input"
-																onclick="check_Timefield_checkbox();">日
+																onclick="check_Timefield_checkbox();">Вс
 															<input type="checkbox" name="ss_date_x_Mon" class="input"
-																onclick="check_Timefield_checkbox();">一
+																onclick="check_Timefield_checkbox();">Пн
 															<input type="checkbox" name="ss_date_x_Tue" class="input"
-																onclick="check_Timefield_checkbox();">二
+																onclick="check_Timefield_checkbox();">Вт
 															<input type="checkbox" name="ss_date_x_Wed" class="input"
-																onclick="check_Timefield_checkbox();">三
+																onclick="check_Timefield_checkbox();">Ср
 															<input type="checkbox" name="ss_date_x_Thu" class="input"
-																onclick="check_Timefield_checkbox();">四
+																onclick="check_Timefield_checkbox();">Чт
 															<input type="checkbox" name="ss_date_x_Fri" class="input"
-																onclick="check_Timefield_checkbox();">五
+																onclick="check_Timefield_checkbox();">Пт
 															<input type="checkbox" name="ss_date_x_Sat" class="input"
-																onclick="check_Timefield_checkbox();">六
+																onclick="check_Timefield_checkbox();">Сб
 														</td>
 													</tr>
 													<tr id="ss_schedule_time_tr">
-														<th>自动更新时间</th>
+														<th>Автоматическое обновление по времени</th>
 														<td>
 															<input type="text" maxlength="2" class="input_3_table"
 																style="width: 30px" name="ss_time_x_hour"
 																onKeyPress="return validator.isNumber(this,event);"
 																onblur="validator.timeRange(this, 0);" autocorrect="off"
-																autocapitalize="off">时:
+																autocapitalize="off">ч:
 															<input type="text" maxlength="2" class="input_3_table"
 																style="width: 30px" name="ss_time_x_min"
 																onKeyPress="return validator.isNumber(this,event);"
 																onblur="validator.timeRange(this, 1);" autocorrect="off"
-																autocapitalize="off">分
+																autocapitalize="off">мин
 														</td>
 													</tr>
-													 <tr><th>保存订阅URL列表</th>
+													 <tr><th>Сохранить список URL подписок</th>
 				<td>
-				<input name="button" type="button" class="btn btn-primary" onclick="applyRule();" value="保存订阅URL列表" />
-				<br>修改订阅URL和节点关键字后，请先点击更新
+				<input name="button" type="button" class="btn btn-primary" onclick="applyRule();" value="Сохранить список URL подписок" />
+				<br>После изменения URL подписки и ключевых слов узла сначала нажмите «Обновить»
 				</td>
 			</tr>
-			<tr><th>更新所有订阅服务器节点</th>
+			<tr><th>Обновить все узлы подписки на сервер</th>
 				<td>
-				<input type="button" id="btn_update_link" class="btn btn-info" value="更新所有订阅服务器节点" onclick="dlink();">
+				<input type="button" id="btn_update_link" class="btn btn-info" value="Обновить все узлы подписки на сервер" onclick="dlink();">
 				</td>
 			</tr>
-			<tr><th>删除列表所有服务器节点</th>
+			<tr><th>Удалить все узлы в списке</th>
 				<td>
-				<input type="button" id="btn_rest_link" class="btn btn-danger" value="删除列表所有服务器节点" onclick="ddlink();">
+				<input type="button" id="btn_rest_link" class="btn btn-danger" value="Удалить все узлы в списке" onclick="ddlink();">
 				</td>
 			</tr>
 												
@@ -1935,20 +1935,20 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														<th colspan="2" style="background-color: #E3E3E3;">
 															<select name="ss_list_mode" style="display: none"
 																id="ss_list_mode" class="input" style="width: 100px;">
-																<option value="a">全部节点</option>
-																<option value="d">自定义节点</option>
-																<option value="c">订阅节点</option>
+																<option value="a">Все узлы</option>
+																<option value="d">Пользовательские узлы</option>
+																<option value="c">Узлы подписки</option>
 															</select>
 															<input type="button" id="btn_add_link" class="btn btn-info"
-																value="添加/导入节点">
+																value="Добавить/Импортировать узел">
 															<input type="button" id="btn_ping_link" class="btn btn-info"
-																value="ping节点">
+																value="ping узел">
 															<input type="button" id="btn_aping_link"
-																class="btn btn-info" value="ping全部节点">
+																class="btn btn-info" value="ping все узлы">
 															<input type="button" id="btn_del_link"
-																class="btn btn-danger" value="批量删除节点">
+																class="btn btn-danger" value="Массовое удаление узлов">
 															<input type="button" id="btn_ctime" style="display:none;"
-																class="btn btn-good" value="正在运行脚本:0s"
+																class="btn btn-good" value="Процесс запуск скрипта:0s"
 																onclick="">
 														</th>
 													</tr>
@@ -1962,19 +1962,19 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														id="sslist">
 														<tr>
 															<th id="ss_setting_title" colspan="2" style="background-color: #E3E3E3;">
-																添加/删除/编辑节点</th>
+																Добавить/Удалить/Редактировать узел</th>
 														</tr>
 														<tr>
-															<th width="50%">导入节点信息:</th>
+															<th width="50%">Импортировать информацию об узле:</th>
 															<td>
 																<input type="button" class="btn btn-primary"
-																	value="点击输入节点URL"
+																	value="Нажмите, чтобы ввести URL узла"
 																	onclick="return import_ssr_url(this, '<%=self.option%>', '<%=self.value%>')" />
 																<span id="<%=self.option%>-status"></span></td>
 
 														</tr>
 														<tr>
-															<th width="50%">服务器节点类型</th>
+															<th width="50%">Тип узла сервера</th>
 															<td>
 																<select name="ssp_type" id="ssp_type" class="input"
 																	style="width: 200px;" onchange="switch_ss_type()">
@@ -1989,7 +1989,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</tr>
 
 														<tr>
-															<th width="50%">别名:（可选）</th>
+															<th width="50%">Псевдоним: (необязательно)</th>
 															<td>
 																<input type="text" class="input" size="15"
 																	name="ssp_name" id="ssp_name" style="width: 200px"
@@ -1997,14 +1997,14 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</td>
 														</tr>
 														<tr>
-															<th width="50%">服务器IP地址</th>
+															<th width="50%">IP-адрес сервера</th>
 															<td>
 																<input type="text" class="input" size="15"
 																	name="ssp_server" id="ssp_server" value="" />
 															</td>
 														</tr>
 														<tr>
-															<th width="50%">服务器端口</th>
+															<th width="50%">Порт сервера</th>
 															<td>
 																<input type="text" class="input" size="15"
 																	name="ssp_prot" id="ssp_prot" style="width: 200px"
@@ -2012,7 +2012,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</td>
 														</tr>
 														<tr id="row_ss_password" style="display:none;">
-															<th width="50%">服务器密码</th>
+															<th width="50%">Пароль сервера</th>
 															<td>
 																<input type="password" class="input" size="32"
 																	name="ss_password" id="ss_password" value="" />
@@ -2023,7 +2023,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</td>
 														</tr>
 														<tr id="row_ss_method" style="display:none;">
-															<th width="50%">加密方式</th>
+															<th width="50%">Метод шифрования</th>
 															<td>
 																<select name="ss_method" id="ss_method" class="input"
 																	style="width: 200px;">
@@ -2060,7 +2060,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</td>
 														</tr>
 														<tr id="row_ss_protocol" style="display:none;">
-															<th width="50%">协议</th>
+															<th width="50%">Протокол</th>
 															<td>
 																<select name="ss_protocol" id="ss_protocol"
 																	class="input" style="width: 200px;">
@@ -2078,23 +2078,23 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</td>
 														</tr>
 														<tr id="row_ss_plugin" style="display:none;">
-															<th width="50%">插件</th>
+															<th width="50%">Плагин</th>
 															<td>
 																<input type="text" class="input" size="15"
 																	name="ss_plugin" id="ss_plugin" value="" />
 															</td>
 														</tr>
 														<tr id="row_ss_plugin_opts" style="display:none;">
-															<th width="50%">插件参数</th>
+															<th width="50%">Параметры плагина</th>
 															<td>
 																<input type="text" class="input" size="15"
 																	name="ss_plugin_opts" id="ss_plugin_opts"
 																	value="" />
 															</td>
 														</tr>
-														<!--SS参数结束--SSR参数开始-->
+														<!-- SS параметры завершены -- SSR параметры начинаются -->
 														<tr id="row_ss_protocol_para" style="display:none;">
-															<th width="50%">传输协议参数（可选）</th>
+															<th width="50%">Параметры транспортного протокола (необязательно)</th>
 															<td>
 																<input type="text" class="input" size="15"
 																	name="ss_protocol_param" id="ss_protocol_param"
@@ -2102,7 +2102,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</td>
 														</tr>
 														<tr id="row_ss_obfs" style="display:none;">
-															<th width="50%">混淆</th>
+															<th width="50%">Обфускация</th>
 															<td>
 																<select name="ss_obfs" id="ss_obfs" class="input"
 																	style="width: 200px;">
@@ -2117,31 +2117,31 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</td>
 														</tr>
 														<tr id="row_ss_obfs_para" style="display:none;">
-															<th width="50%">混淆参数（可选）</th>
+															<th width="50%">Параметры обфускации (необязательно)</th>
 															<td>
 																<input type="text" class="input" size="15"
 																	name="ss_obfs_param" id="ss_obfs_param"
 																	style="width: 200px" value="" />
 															</td>
 														</tr>
-														<!--SSR参数结束-->
+														<!-- SSR параметры завершены -->
 														</tbody>
 														<tr id="row_s5_enable" style="display:none;">
-															<th>启用用户名/密码认证</th>
+															<th>Включить аутентификацию по имени пользователя/паролю</th>
 															<td>
 																<input type="checkbox" name="s5_aut" id="s5_aut" value="0" >
 
 															</td>
 														</tr>
 														<tr id="row_s5_username" style="display:none;">
-															<th width="50%">用户名</th>
+															<th width="50%">Имя пользователя</th>
 															<td>
 																<input type="password" class="input" size="32"
 																	name="s5_username" id="s5_username" value="" />
 															</td>
 														</tr>
 														<tr id="row_s5_password" style="display:none;">
-															<th width="50%">密码</th>
+															<th width="50%">Пароль</th>
 															<td>
 																<input type="password" class="input" size="32"
 																	name="s5_password" id="s5_password" value="" />
@@ -2170,7 +2170,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</td>
 														</tr>
 														<tr id="row_v2_security" style="display:none;">
-															<th width="50%">加密</th>
+															<th width="50%">Шифрование</th>
 															<td>
 																<select name="v2_security" id="v2_security"
 																	class="input" style="width: 200px;">
@@ -2184,7 +2184,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</td>
 														</tr>
 														<tr id="row_v2_net" style="display:none;">
-															<th width="50%">传输方式</th>
+															<th width="50%">Способ передачи</th>
 															<td>
 																<select name="v2_transport" id="v2_transport"
 																	class="input" style="width: 200px;"
@@ -2199,16 +2199,16 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</td>
 														</tr>
 														<tr id="row_v2_type" style="display:none;">
-															<th width="50%">伪装类型</th>
+															<th width="50%">Тип маскировки</th>
 															<td>
 																<select id="v2_tcp_guise" name="v2_tcp_guise"
 																	class="input" style="width: 200px;display:none;">
-																	<option value="none">未配置</option>
+																	<option value="none">Не настроено</option>
 																	<option value="http">HTTP</option>
 																</select>
 																<select id="v2_kcp_guise" name="v2_kcp_guise"
 																	class="input" style="width: 200px;display:none;">
-																	<option value="none">未配置</option>
+																	<option value="none">Не настроено</option>
 																	<option value="srtp">VideoCall (SRTP)</option>
 																	<option value="utp">BitTorrent (uTP)</option>
 																	<option value="wechat-video">WechatVideo</option>
@@ -2331,7 +2331,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															<td>
 																<select name="v2_quic_security" id="v2_quic_security"
 																	class="input" style="width: 200px;">
-																	<option value="none">未配置</option>
+																	<option value="none">Не настроено</option>
 																	<option value="aes-128-gcm">aes-128-gcm</option>
 																	<option value="chacha20-ietf-poly1305">
 																		chacha20-ietf-poly1305</option>
@@ -2351,7 +2351,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															<td>
 																<select name="v2_quic_guise" id="v2_quic_guise"
 																	class="input" style="width: 200px;">
-																	<option value="none">未配置</option>
+																	<option value="none">Не настроено</option>
 																	<option value="srtp">VideoCall (SRTP)</option>
 																	<option value="utp">BitTorrent (uTP)</option>
 																	<option value="wechat-video">WechatVideo</option>
@@ -2370,7 +2370,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															<th>TLS/XTLS</th>
 															<td>
 																<select name="v2_tls" id="v2_tls" class="input" style="width: 200px;">
-																	<option value="0">未配置</option>
+																	<option value="0">Не настроено</option>
 																	<option value="1">tls</option>
 																	<option value="2">xtls</option>
 																</select>
@@ -2381,7 +2381,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															<th>XTLS flow</th>
 															<td>
 																<select name="v2_flow" id="v2_flow" class="input" style="width: 200px;">
-																	<option value="0">未配置</option>
+																	<option value="0">Не настроено</option>
 																	<option value="1">xtls-rprx-direct</option>
 																	<option value="2">xtls-rprx-splice</option>
 																</select>
@@ -2402,7 +2402,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 																<input type="checkbox" name="v2_mux" id="v2_mux" >
 															</td>
 														</tr>
-														<!--<tr> <th>自动切换</th>
+														<!--<tr> <th>Автоматическое переключение</th>
 <td>
 <div class="main_itoggle">
 <div id="switch_enable_x_0_on_of">
@@ -2420,12 +2420,12 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 																<center><input name="ManualRULESList2"
 																		id="ManualRULESList2" type="button"
 																		class="btn btn-primary" onclick="add_ss();"
-																		style="width: 219px" value="保存节点" /></center>
+																		style="width: 219px" value="Сохранить узел" /></center>
 															</td>
 															<td>
 																<center><input name="button" type="button"
 																		class="btn btn-primary" id="close_add"
-																		style="width: 219px" value="取消" /></center>
+																		style="width: 219px" value="Отмена" /></center>
 															</td>
 														</tr>
 													</table>
@@ -2434,10 +2434,10 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 											<div id="wnd_ss_ssl" style="display:none">
 												<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">进程资源限制</th>
+														<th colspan="2" style="background-color: #E3E3E3;">Ограничение ресурсов процесса</th>
 													</tr>
 													<tr>
-														<th>启用进程资源限制</th>
+														<th>Включить ограничение ресурсов процесса</th>
 														<td>
 															<div class="main_itoggle">
 																<div id="ss_cgroups_on_of">
@@ -2458,7 +2458,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr>
-														<th width="50%">CPU 限制</th>
+														<th width="50%">Ограничение ЦП</th>
 														<td>
 															<input type="text" class="input" size="15" name="ss_cgoups_cpu_s"
 																style="width: 200px"
@@ -2466,7 +2466,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr>
-														<th width="50%">内存限制</th>
+														<th width="50%">Ограничение памяти</th>
 														<td>
 															<input type="text" class="input" size="15" name="ss_cgoups_mem_s"
 																style="width: 200px"
@@ -2474,10 +2474,10 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">节点故障自动切换设置</th>
+														<th colspan="2" style="background-color: #E3E3E3;">Настройки автоматического переключения узлов при сбое</th>
 													</tr>
 													<tr>
-														<th>启用进程自动守护</th>
+														<th>Включить автоматическое наблюдение за процессом</th>
 														<td>
 															<div class="main_itoggle">
 																<div id="ss_watchcat_on_of">
@@ -2497,7 +2497,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 															</div>
 														</td>
 													</tr>
-													<!--  <tr> <th>启用自动切换</th>
+													<!--  <tr> <th>Включить Автоматическое переключение</th>
 <td>
 <div class="main_itoggle">
 <div id="ss_turn_on_of">
@@ -2512,7 +2512,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 </tr>
 -->
 													<tr>
-														<th width="50%">自动切换检查周期(秒)</th>
+														<th width="50%">Период проверки автоматического переключения (сек)</th>
 														<td>
 															<input type="text" class="input" size="15" name="ss_turn_s"
 																style="width: 200px"
@@ -2520,7 +2520,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr>
-														<th width="50%">切换检查超时时间(秒)</th>
+														<th width="50%">Время ожидания проверки переключения (сек)</th>
 														<td>
 															<input type="text" class="input" size="15" name="ss_turn_ss"
 																style="width: 200px"
@@ -2528,33 +2528,33 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<!--
-<tr> <th width="50%">自定义国内IP更新地址:</th>
+<tr> <th width="50%">Пользовательский адрес обновления:</th>
 	<td>
 		<input type="text" class="input" size="15" name="ss_chnroute_url" style="width: 200px"  value="<% nvram_get_x("","ss_chnroute_url"); %>" />
 	</td>
 </tr>
-<tr> <th width="50%">广告过滤地址:</th>
+<tr> <th width="50%">Адрес фильтрации рекламы:</th>
 	<td>
 		<input type="text" class="input" size="15" name="ss_adblock_url" style="width: 200px"  value="<% nvram_get_x("","ss_adblock_url"); %>" />
 	</td>
 </tr>-->
 
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">SOCKS5代理</th>
+														<th colspan="2" style="background-color: #E3E3E3;">SOCKS5 прокси</th>
 													</tr>
 													<tr>
-														<th>服务器:
+														<th>Сервер:
 														</th>
 														<td>
 															<select name="socks5_enable" id="s5_nodeList"
 																style="width: 200px;" onchange="shows5dlinkList()">
-																<option value="nil">停用</option>
-																<option value="same">与主服务相同</option>
+																<option value="nil">Отключить</option>
+																<option value="same">Такой же, как основной сервер</option>
 															</select>
 														</td>
 													</tr>
 													<tr>
-														<th width="50%">本地端口:</th>
+														<th width="50%">Локальный порт:</th>
 														<td>
 															<input type="text" class="input" size="15"
 																name="socks5_port" style="width: 200px"
@@ -2567,7 +2567,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														<td style="border: 0 none; padding: 0px;">
 															<center><input name="button" type="button"
 																	class="btn btn-primary" style="width: 200px"
-																	onclick="applyRule();" value="应用设置" /></center>
+																	onclick="applyRule();" value="Применить настройки" /></center>
 														</td>
 													</tr>
 												</table>
@@ -2591,7 +2591,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr>
-														<th width="50%">自定义国内IP更新地址:</th>
+														<th width="50%">Пользовательский адрес обновления внутренних IP:</th>
 														<td>
 															<input type="text" class="input" size="15"
 																name="ss_chnroute_url" style="width: 200px"
@@ -2665,8 +2665,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													<tr>
 														<td colspan="3">
 															<i class="icon-hand-right"></i> <a
-																href="javascript:spoiler_toggle('script8')"><span>不走SS代理的LAN
-																	IP:</span></a>
+																href="javascript:spoiler_toggle('script8')"><span>IP внутренней сети, не использующие SS прокси:</span></a>
 															<div id="script8">
 																<textarea rows="8" wrap="off" spellcheck="false"
 																	maxlength="314571" class="span12"
@@ -2678,8 +2677,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													<tr>
 														<td colspan="3">
 															<i class="icon-hand-right"></i> <a
-																href="javascript:spoiler_toggle('script9')"><span>强制走SS代理的LAN
-																	IP:</span></a>
+																href="javascript:spoiler_toggle('script9')"><span>IP внутренней сети, принудительно использующие SS прокси:</span></a>
 															<div id="script9">
 																<textarea rows="8" wrap="off" spellcheck="false"
 																	maxlength="314571" class="span12"
@@ -2691,7 +2689,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													<tr>
 														<td colspan="3">
 															<i class="icon-hand-right"></i> <a
-																href="javascript:spoiler_toggle('script13')"><span>游戏模式LAN IP（客户端UDP所有端口,TCP跟随主服务器端口模式,强制走绕过大陆模式）:</span></a>
+																href="javascript:spoiler_toggle('script13')"><span>Режим игры IP внутренней сети (все порты UDP клиента, TCP следует за основным сервером, принудительно используется режим обхода китайских IP):</span></a>
 															<div id="script13">
 																<textarea rows="8" wrap="off" spellcheck="false"
 																	maxlength="314571" class="span12"
@@ -2703,8 +2701,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													<tr>
 														<td colspan="3">
 															<i class="icon-hand-right"></i> <a
-																href="javascript:spoiler_toggle('script11')"><span>强制走SS代理的WAN
-																	IP:</span></a>
+																href="javascript:spoiler_toggle('script11')"><span>IP внешней сети, принудительно использующие SS прокси:</span></a>
 															<div id="script11">
 																<textarea rows="8" wrap="off" spellcheck="false"
 																	maxlength="314571" class="span12"
@@ -2716,8 +2713,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													<tr>
 														<td colspan="3">
 															<i class="icon-hand-right"></i> <a
-																href="javascript:spoiler_toggle('script12')"><span>不走SS代理的WAN
-																	IP:</span></a>
+																href="javascript:spoiler_toggle('script12')"><span>IP внешней сети, не использующие SS прокси:</span></a>
 															<div id="script12">
 																<textarea rows="8" wrap="off" spellcheck="false"
 																	maxlength="314571" class="span12"
@@ -2729,7 +2725,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													<tr>
 														<td colspan="3">
 															<i class="icon-hand-right"></i> <a
-																href="javascript:spoiler_toggle('script10')"><span>强制走SS代理的域名:</span></a>
+																href="javascript:spoiler_toggle('script10')"><span>Доменные имена, принудительно использующие SS прокси:</span></a>
 															<div id="script10">
 																<textarea rows="8" wrap="off" spellcheck="false"
 																	maxlength="314571" class="span12"
@@ -2741,7 +2737,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													<tr>
 														<td colspan="3">
 															<i class="icon-hand-right"></i> <a
-																href="javascript:spoiler_toggle('script15')"><span>不走SS代理的域名:</span></a>
+																href="javascript:spoiler_toggle('script15')"><span>Доменные имена, не использующие SS прокси:</span></a>
 															<div id="script15">
 																<textarea rows="8" wrap="off" spellcheck="false"
 																	maxlength="314571" class="span12"
@@ -2784,29 +2780,28 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 												<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
 														<th colspan="2" style="background-color: #E3E3E3;">
-															chinadns-ng说明:</th>
+															Описание chinadns-ng:</th>
 													</tr>
 													<tr>
 														<th width="100%">
-															绕过大陆模式启用chinadns会加载CDN域名规则来分流常用网站跑国内DNS,加载gfwlist列表来分流到国外DNS
+															В режиме обхода китайских IP включение chinadns загрузит правила CDN доменов для маршрутизации часто используемых сайтов через внутренний DNS и загрузит список gfwlist для маршрутизации через внешний DNS.
 														</th>
 													</tr>
 													<tr>
-														<th width="100%">此模式会占用一部分内存资源,内存少的机器请谨慎开启。</th>
+														<th width="100%">Этот режим будет использовать часть ресурсов памяти, будьте осторожны при включении на устройствах с малым объемом памяти.</th>
 													</tr>
 													<tr>
 														<th colspan="2" style="background-color: #E3E3E3;">
-															进程资源限制说明:</th>
+															Описание ограничения ресурсов процесса:</th>
 													</tr>
 													<tr>
 														<th width="100%">
-															进程资源限制是为了防止进程占用过多资源导致路由器卡顿或重启,如果你的路由器配置足够,可以适当调高限制值。
+															Ограничение ресурсов процесса предназначено для предотвращения использования процессом слишком большого количества ресурсов, что может привести к зависанию или перезагрузке маршрутизатора. Если ваш маршрутизатор достаточно мощный, вы можете увеличить значения ограничений.
 														</th>
 													</tr>
 													<tr>
 														<th width="100%">
-															此功能底层使用 <a href="https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v1/cgroups.html">cgroups</a>, CPU 限制值为一个大于 2 小于 1024 的整数，表示可以使用的 CPU 百分比，如 512 表示 50%;
-															内存限制值需要带上 M 作为单位, 如 20M 表示可以使用 20M 内存，超出会被内核 OOM Killer 自动 kill。
+															Эта функция использует <a href="https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v1/cgroups.html">cgroups</a> на уровне ядра. Значение ограничения ЦП должно быть целым числом от 2 до 1024, указывающим процент использования ЦП, например, 512 означает 50%; значение ограничения памяти должно включать M в качестве единицы, например, 20M означает, что можно использовать 20M памяти, превышение этого значения приведет к автоматическому завершению процесса с помощью OOM Killer ядра.
 														</th>
 													</tr>
 												</table>
@@ -2827,4 +2822,3 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 </body>
 
 </html>
-
