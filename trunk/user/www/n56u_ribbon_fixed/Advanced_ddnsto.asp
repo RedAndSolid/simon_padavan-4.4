@@ -149,7 +149,7 @@ function done_validating(action){
 								<div class="row-fluid">
 									<div id="tabMenu" class="submenuBlock"></div>
 									<div class="alert alert-info" style="margin: 10px;">
-									<p>DDNSTO是简单、快速的内网穿透工具，不受网络限制，全局掌控私人设备<br>
+									<p>DDNSTO — это простой и быстрый инструмент проброса портов во внутреннюю сеть, не ограниченный сетью, для полного контроля над личными устройствами<br>
 									</p>
 									</div>
 
@@ -158,17 +158,17 @@ function done_validating(action){
 									<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
 
 										<tr>
-											<th>DDNSTO官网</th>
+											<th>DDNSTO официальный сайт</th>
 											<td>
-				<input type="button" class="btn btn-success" value="ddnsto官网" onclick="window.open('https://www.ddnsto.com/')" size="0">
-				<br>点击跳转到DDNSTO官网管理平台,获取ID
+				<input type="button" class="btn btn-success" value="DDNSTO официальный сайт" onclick="window.open('https://www.ddnsto.com/')" size="0">
+				<br>Нажмите для перехода на официальный сайт DDNSTO, чтобы получить ID
 											</td>
 										</tr>
 										<tr> <th><#running_status#></th>
                                             <td id="ddnsto_status" colspan="3"></td>
                                         </tr>
 										<tr>
-										<th width="30%" style="border-top: 0 none;">启用DDNSTO客户端</th>
+										<th width="30%" style="border-top: 0 none;">Включить DDNSTO клиент</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
 													<div id="ddnsto_enable_on_of">
@@ -214,4 +214,3 @@ function done_validating(action){
 </div>
 </body>
 </html>
-
