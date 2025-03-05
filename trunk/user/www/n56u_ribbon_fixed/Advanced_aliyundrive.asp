@@ -149,7 +149,7 @@ function done_validating(action){
 										<tr>
 											<th>refresh token</th>
 											<td>
-				<input type="button" class="btn btn-success" value="点击查看获取 refresh token 的方法" onclick="window.open('https://github.com/messense/aliyundrive-webdav#%E8%8E%B7%E5%8F%96-refresh_token')" size="0">
+				<input type="button" class="btn btn-success" value="点击查看获取 refresh token 的方法" onclick="window.open('https://github.com/messense/aliyundrive-webdav#%E8%8E%B7%E5%8F%96-refresh-token-%E7%9A%84%E6%96%B9%E6%B3%95')" />
 											</td>
 										</tr>
 										<tr> <th><#running_status#></th>
@@ -233,7 +233,7 @@ function done_validating(action){
 					<input type="text" class="input" name="ald_cache_ttl" id="ald_cache_ttl" style="width: 200px" value="<% nvram_get_x("","ald_cache_ttl"); %>" />
 				</td>
 				<tr>
-										<th width="30%" style="border-top: 0 none;">禁止上传、修改和删除文件操作</th>
+										<th width="30%" style="border-top: 0 none;">禁止上传,修改和删除文件操作</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
 													<div id="ald_no_trash_on_of">
@@ -301,4 +301,3 @@ function done_validating(action){
 </div>
 </body>
 </html>
-
