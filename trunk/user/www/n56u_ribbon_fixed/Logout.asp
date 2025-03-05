@@ -32,9 +32,9 @@ function initial(){
     <div style="margin-top: 50px;">
         <center>
             <div class="well" style="max-width: 600px;">
-                <h2><#logoutmessage#></h2>
+                <h2><#Сообщение_о_выходе#></h2>
 
-                <div><#Not_authpage_login_again#></div>
+                <div><#Не_авторизованная_страница_войти_снова#></div>
             </div>
         </center>
     </div>
