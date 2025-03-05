@@ -474,7 +474,7 @@ function updateDateTime()
                                         </tr>
 										<tr id="reboot_schedule_enable_tr">
 				                        <tr>
-                                            <th>启用定时重启</th>
+                                            <th>Включить запланированный перезапуск.</th>
                                             <td>
                                                 <div class="main_itoggle">
                                                     <div id="reboot_schedule_enable_on_of">
@@ -489,7 +489,7 @@ function updateDateTime()
                                             </td>
                                         </tr>
 				<tr id="reboot_schedule_date_tr">
-					<th>自动重启星期</th>
+					<th>Автоматическая перезагрузка по дням недели.</th>
 					<td>
 						<input type="checkbox" name="reboot_date_x_Sun" class="input" onclick="check_Timefield_checkbox();">日
 						<input type="checkbox" name="reboot_date_x_Mon" class="input" onclick="check_Timefield_checkbox();">一
@@ -501,7 +501,7 @@ function updateDateTime()
 					</td>
 				</tr>
 				<tr id="reboot_schedule_time_tr">
-					<th>自动重启时间</th>
+					<th>Время автоматической перезагрузки.</th>
 					<td>
 						<input type="text" maxlength="2" class="input_3_table" style="width: 30px" name="reboot_time_x_hour" onKeyPress="return validator.isNumber(this,event);" onblur="validator.timeRange(this, 0);" autocorrect="off" autocapitalize="off">时:
 						<input type="text" maxlength="2" class="input_3_table" style="width: 30px" name="reboot_time_x_min" onKeyPress="return validator.isNumber(this,event);" onblur="validator.timeRange(this, 1);" autocorrect="off" autocapitalize="off">分
