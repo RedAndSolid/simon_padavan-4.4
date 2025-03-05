@@ -88,7 +88,7 @@ function change_macfilter() {
 function prevent_lock(){
 	if(document.form.macfilter_enable_x.value == "1"){
 		if(document.form.macfilter_num_x_0.value < 1){
-			if(confirm("<#FirewallConfig_MFList_accept_hint1#>")){
+			if(confirm("Вы хотите добавить текущий MAC-адрес в список?")){
 				document.form.macfilter_list_x_0.value = smac[0] + smac[1] + smac[2] + smac[3] + smac[4] + smac[5];
 				document.form.macfilter_time_x_0.value = "00002359";
 				document.form.macfilter_date_x_0.value = "1111111";
@@ -129,7 +129,7 @@ function showLANIPList(){
 		}
 	}
 	if (code == "")
-		code = '<div style="text-align: center;" onclick="hideClients_Block();"><#Nodata#></div>';
+		code = '<div style="text-align: center;" onclick="hideClients_Block();">Нет данных</div>';
 	code +='<!--[if lte IE 6.5]><iframe class="hackiframe2"></iframe><![endif]-->';	
 	$("ClientList_Block").innerHTML = code;
 }
@@ -153,12 +153,12 @@ function pullLANIPList(obj){
 
 function validNewRow(max_rows) {
 	if (document.form.macfilter_num_x_0.value >= max_rows){
-		alert("<#JS_itemlimit1#> " + max_rows + " <#JS_itemlimit2#>");
+		alert("Элемент ограничен " + max_rows + " записями");
 		return false;
 	}
 
 	if (document.form.macfilter_list_x_0.value==""){
-		alert("<#JS_fieldblank#>");
+		alert("Поле не может быть пустым");
 		document.form.macfilter_list_x_0.focus();
 		document.form.macfilter_list_x_0.select();
 		return false;
@@ -175,7 +175,7 @@ function validNewRow(max_rows) {
 		(document.form.macfilter_date_x_Thu.checked == false) &&
 		(document.form.macfilter_date_x_Fri.checked == false) &&
 		(document.form.macfilter_date_x_Sat.checked == false)){
-		alert("<#MAC_Days#> - <#JS_fieldblank#>");
+		alert("Дни - Поле не может быть пустым");
 		return false;
 	}
 
@@ -189,7 +189,7 @@ function validNewRow(max_rows) {
 	var starttime = eval(document.form.macfilter_time_x_starthour.value + document.form.macfilter_time_x_startmin.value);
 	var endtime = eval(document.form.macfilter_time_x_endhour.value + document.form.macfilter_time_x_endmin.value);
 	if(starttime == endtime){
-		alert("<#FirewallConfig_URLActiveTime_itemhint2#>");
+		alert("Время начала и окончания не может совпадать");
 		document.form.macfilter_time_x_starthour.focus();
 		document.form.macfilter_time_x_starthour.select();
 		return false;
@@ -236,19 +236,19 @@ function format_time(nvtime) {
 function format_date(nvdate) {
 	var caption = "";
 	if (getDateCheck(nvdate, 1) == true)
-		caption = caption + ", <#DAY_Mon#>";
+		caption = caption + ", Понедельник";
 	if (getDateCheck(nvdate, 2) == true)
-		caption = caption + ", <#DAY_Tue#>";
+		caption = caption + ", Вторник";
 	if (getDateCheck(nvdate, 3) == true)
-		caption = caption + ", <#DAY_Wed#>";
+		caption = caption + ", Среда";
 	if (getDateCheck(nvdate, 4) == true)
-		caption = caption + ", <#DAY_Thu#>";
+		caption = caption + ", Четверг";
 	if (getDateCheck(nvdate, 5) == true)
-		caption = caption + ", <#DAY_Fri#>";
+		caption = caption + ", Пятница";
 	if (getDateCheck(nvdate, 6) == true)
-		caption = caption + ", <#DAY_Sat#>";
+		caption = caption + ", Суббота";
 	if (getDateCheck(nvdate, 0) == true)
-		caption = caption + ", <#DAY_Sun#>";
+		caption = caption + ", Воскресенье";
 	
 	if (caption == "")
 		caption = "-";
@@ -264,7 +264,7 @@ function showMFList(){
 	var temp_date = '<% nvram_get_x("", "macfilter_date_x_0"); %>';
 
 	if(MACList.length == 0) {
-		code +='<tr><td colspan="4" style="text-align: center;"><div class="alert alert-info"><#IPConnection_VSList_Norule#></div></td></tr>';
+		code +='<tr><td colspan="4" style="text-align: center;"><div class="alert alert-info">Нет правил</div></td></tr>';
 		
 		document.form.macfilter_time_x_0.value = (temp_time == '') ? "00002359" : temp_time;
 		document.form.macfilter_date_x_0.value = (temp_date == '') ? "1111111" : temp_date;
@@ -389,7 +389,7 @@ function done_validating(action){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th width="50%" style="border-top: 0 none;"><a class="help_tooltip" href="javascript:void(0);" onmouseover="openTooltip(this,18,1);"><#FirewallConfig_MFMethod_itemname#></a></th>
+                                            <th width="50%" style="border-top: 0 none;"><a class="help_tooltip" href="javascript:void(0);" onmouseover="openTooltip(this,18,1);"><#FirewallConfig_MACFilter_Enable#></a></th>
                                             <td style="border-top: 0 none;">
                                                 <select name="macfilter_enable_x" class="input" onchange="change_macfilter()">
                                                     <option value="0" <% nvram_match_x("","macfilter_enable_x", "0","selected"); %>><#CTL_Disabled#></option>
@@ -400,16 +400,16 @@ function done_validating(action){
                                         </tr>
 
                                         <tr id="mac_drop_row" style="display:none;">
-                                            <th><#MAC_BlockHost#></th>
+                                            <th>Блокировать MAC-адреса</th>
                                             <td>
                                                 <div class="main_itoggle">
                                                     <div id="fw_mac_drop_on_of">
-                                                        <input type="checkbox" id="fw_mac_drop_fake" <% nvram_match_x("", "fw_mac_drop", "1", "value=1 checked"); %><% nvram_match_x("", "fw_mac_drop", "0", "value=0"); %>>
+                                                        <input type="checkbox" id="fw_mac_drop_fake" <% nvram_match_x("", "fw_mac_drop", "1", "value=1 checked"); %><% nvram_match_x("", "fw_mac_drop", "0", "value=0"); %> />
                                                     </div>
                                                 </div>
                                                 <div style="position: absolute; margin-left: -10000px;">
                                                     <input type="radio" value="1" name="fw_mac_drop" id="fw_mac_drop_1" <% nvram_match_x("","fw_mac_drop", "1", "checked"); %>><#checkbox_Yes#>
-                                                    <input type="radio" value="0" name="fw_mac_drop" id="fw_mac_drop_0" <% nvram_match_x("","fw_mac_drop", "0", "checked"); %>><#checkbox_No#>
+                                                    <input type="radio" value="0" name="fw_mac_drop" id="fw_mac_drop_0" <% nvram_match_x("
                                                 </div>
                                             </td>
                                         </tr>
