@@ -993,9 +993,9 @@ function simplyMAC(fullMAC){
                                             <th><a class="help_tooltip" href="javascript:void(0);" onmouseover="openTooltip(this,7,23);"><#HardwareNAT#></a></th>
                                             <td>
                                                 <select name="hw_nat_mode" class="input">
-                                                    <option value="0" <% nvram_match_x("", "hw_nat_mode", "0", "selected"); %>>Disable (Slow)</option>
-                                                    <option value="1" <% nvram_match_x("", "hw_nat_mode", "1", "selected"); %>>Offload TCP/UDP for LAN/WLAN</option>
-                                                    <option value="2" <% nvram_match_x("", "hw_nat_mode", "2", "selected"); %>>Offload TCP/UDP for LAN</option>
+                                                    <option value="0" <% nvram_match_x("", "hw_nat_mode", "0", "selected"); %>>Отключить (медленно)</option>
+                                                    <option value="1" <% nvram_match_x("", "hw_nat_mode", "1", "selected"); %>>Разгрузка TCP/UDP для LAN/WLAN</option>
+                                                    <option value="2" <% nvram_match_x("", "hw_nat_mode", "2", "selected"); %>>Разгрузка TCP/UDP для LAN</option>
                                                 </select>
                                             </td>
                                         </tr>
